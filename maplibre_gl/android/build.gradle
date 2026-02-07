@@ -2,14 +2,13 @@ group 'org.maplibre.maplibregl'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '2.3.0'
+    ext.kotlin_version = '2.0.21'
     repositories {
         google()
         mavenCentral()
     }
-
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.13.2'
+        classpath 'com.android.tools.build:gradle:8.9.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -25,38 +24,37 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    if (project.android.hasProperty("namespace")) {
-        namespace 'org.maplibre.maplibregl'
-    }
-    compileSdkVersion 36
-    buildToolsVersion "36.0.0"
+    namespace 'org.maplibre.maplibregl'
 
+    compileSdkVersion 36
     ndkVersion "28.1.13356709"
 
     defaultConfig {
         minSdkVersion 21
-        compileSdk 36
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
+
     lintOptions {
         disable 'InvalidPackage'
     }
+
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_21
-        targetCompatibility JavaVersion.VERSION_21
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
+
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_21.toString()
-    }
-    dependencies {
-        implementation 'org.maplibre.gl:android-sdk:12.3.1'
-        implementation 'org.maplibre.gl:android-plugin-annotation-v9:3.0.2'
-        implementation 'org.maplibre.gl:android-plugin-offline-v9:3.0.2'
-        implementation 'com.squareup.okhttp3:okhttp:5.3.2'
+        jvmTarget = "17"
     }
 }
 
 dependencies {
     implementation 'androidx.core:core-ktx:1.17.0'
+
+    implementation 'org.maplibre.gl:android-sdk:12.3.1'
+    implementation 'org.maplibre.gl:android-plugin-annotation-v9:3.0.2'
+    implementation 'org.maplibre.gl:android-plugin-offline-v9:3.0.2'
+
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
 }
